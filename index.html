@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="icon" href="tv-icon.png" />
   <style>
     #tv_container {
       width: 1400px; /* Adjust TV image width */
@@ -34,29 +35,31 @@
       text-align: center;
     }
   </style>
-  <title>Document</title>
+  <title>Tv Test</title>
 </head>
 <body>
+
   <h1>TV Test</h1>
+
   <div id="tv_container">
-    
-    <iframe id="embededVideo" src="https://www.youtube.com/embed/J5c_a03t-Ls?autoplay=1&showinfo=0&controls=0"
-    frameBorder="0"
-    allowfullscreen></iframe>
+
+    <iframe id="embededVideo" src="https://www.youtube.com/embed/J5c_a03t-Ls?autoplay=1&showinfo=0&controls=0"></iframe>
     
     <img class="image" src="tv.png" alt="tv"  usemap="#map1">
     <map name="map1">
       <area id="channelButton" shape="circle" coords="1290,615,60" alt="map1">
       <area id="powerButton" shape="circle" coords="1192,442,20" alt="map1">
     </map>
+
   </div>
+
   <script>
     const videoElement = document.getElementById('embededVideo')
     const channelButton = document.getElementById('channelButton')
     const powerButton = document.getElementById('powerButton')
 
-    let powerOn = true;
-    let currentChannel = 0;
+    let powerOn = true
+    let currentChannel = 0
     const videoLinks = [
       'https://www.youtube.com/embed/J5c_a03t-Ls?autoplay=1&showinfo=0&controls=0',
       'https://www.youtube.com/embed/CNdNau8Y82c?autoplay=1&showinfo=0&controls=0',
