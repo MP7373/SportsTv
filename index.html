@@ -72,8 +72,10 @@
     })
 
     function changeChannel() {
-      currentChannel < 2 ? currentChannel++ : currentChannel = 0
-      videoElement.setAttribute('src', videoLinks[currentChannel])
+      if(powerOn) {
+        currentChannel < 2 ? currentChannel++ : currentChannel = 0
+        videoElement.setAttribute('src', videoLinks[currentChannel])
+      }
     }
 
     function powerToggle() {
