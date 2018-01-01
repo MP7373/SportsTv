@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    #tv_container {
+      width: 1400px; /* Adjust TV image width */
+      height: 800px; /* Adjust TV image height */
+      position: absolute;
+      z-index: 10;
+    }
+
+    .image {
+      opacity: 1;
+      width: 1400px;
+      height: 800px;
+    }
+
+    #embededVideo {
+      z-index: -1;
+      position: absolute;
+      top: 45px;
+      left: 40px;
+      width: 1050px;
+      height: 680px;
+      border-width: 0px;
+      background-color: black;
+    }
+
+    h1 {
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+    }
+  </style>
+  <title>Document</title>
+</head>
+<body>
+  <h1>TV Test</h1>
+  <div id="tv_container">
+    
+    <iframe id="embededVideo" src="https://www.youtube.com/embed/J5c_a03t-Ls?autoplay=1&showinfo=0&controls=0"
+    frameBorder="0"
+    allowfullscreen></iframe>
+    
+    <img class="image" src="tv.png" alt="tv"  usemap="#map1">
+    <map name="map1">
+      <area id="channelButton" shape="circle" coords="1290,615,60" alt="map1">
+      <area id="powerButton" shape="circle" coords="1192,442,20" alt="map1">
+    </map>
+  </div>
+  <script>
+    const videoElement = document.getElementById('embededVideo')
+    const channelButton = document.getElementById('channelButton')
+    const powerButton = document.getElementById('powerButton')
+
+    let powerOn = true;
+    let currentChannel = 0;
+    const videoLinks = [
+      'https://www.youtube.com/embed/J5c_a03t-Ls?autoplay=1&showinfo=0&controls=0',
+      'https://www.youtube.com/embed/CNdNau8Y82c?autoplay=1&showinfo=0&controls=0',
+      'https://www.youtube.com/embed/7YOJHlapZZw?autoplay=1&showinfo=0&controls=0'
+    ]
+
+    channelButton.addEventListener('click', () => {
+      changeChannel()
+    })
+
+    powerButton.addEventListener('click', () => {
+      powerToggle()
+    })
+
+    function changeChannel() {
+      currentChannel < 2 ? currentChannel++ : currentChannel = 0
+      videoElement.setAttribute('src', videoLinks[currentChannel])
+    }
+
+    function powerToggle() {
+      if(powerOn) {
+        powerOn = false
+        videoElement.setAttribute('src', '')
+      } else {
+        powerOn = true
+        videoElement.setAttribute('src', videoLinks[currentChannel])
+      }
+    }
+  </script>
+</body>
+</html>
