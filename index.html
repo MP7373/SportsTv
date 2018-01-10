@@ -14,20 +14,17 @@
       align-items: center;
       justify-content: center;
     }
-    
 	  #tv-container {
-      width: 1086px; /* Adjust TV image width */
-      height: 582px; /* Adjust TV image height */
+      width: 1086px;
+      height: 582px;
       position: relative;
       z-index: 10;
     }
-
     #tv-image {
       opacity: 1;
       width: 1086px;
       height: 582px;
-    }
-    
+    } 
     #embeded-video {
       z-index: -1;
       position: absolute;
@@ -42,33 +39,32 @@
   <title>Tv Test</title>
 </head>
 <body>
-
   <div id="outer-container">
-
     <div id="tv-container">
-  
-      <iframe id="embeded-video" src="https://www.youtube.com/embed/J5c_a03t-Ls?autoplay=1&showinfo=0&controls=0"></iframe>
-      
-      <img id="tv-image" src='tv.png' alt="tv"  usemap="#tv-image-button-map">
+      <iframe id="embeded-video" src=""></iframe>
+      <img id="tv-image" src="tv.png" alt="tv"  usemap="#tv-image-button-map">
       <map name="tv-image-button-map">
         <area id="channel-button" shape="circle" coords="1000,450,50" alt="channel-button">
         <area id="power-button" shape="circle" coords="927,322,14" alt="power-button">
       </map>
-  
     </div>
   </div>
-
   <script>
     const videoElement = document.getElementById('embeded-video')
     const channelButton = document.getElementById('channel-button')
     const powerButton = document.getElementById('power-button')
     let powerOn = true
-    let currentChannel = 0
-    const videoLinks = [
-      'https://www.youtube.com/embed/J5c_a03t-Ls?autoplay=1&showinfo=0&controls=0',
-      'https://www.youtube.com/embed/CNdNau8Y82c?autoplay=1&showinfo=0&controls=0',
-      'https://www.youtube.com/embed/7YOJHlapZZw?autoplay=1&showinfo=0&controls=0'
+    const youtubeBaseUrl = 'https://www.youtube.com/embed/'
+    const youtubeUrlOptions = '?autoplay=1&showinfo=0&controls=0'
+    const videoKeys  = [
+      'cq9AogwLvow',
+      'ajx47V6zlQI',
+      'Ou3jQNQges8',
+      '4bB1bliVwQE',
+      'JN896cU8s70'
     ]
+    let currentChannel = Math.floor(Math.random() * videoKeys.length)
+    setChannel()
     channelButton.addEventListener('click', () => {
       changeChannel()
     })
@@ -77,8 +73,8 @@
     })
     function changeChannel() {
       if(powerOn) {
-        currentChannel < 2 ? currentChannel++ : currentChannel = 0
-        videoElement.setAttribute('src', videoLinks[currentChannel])
+        currentChannel < videoKeys.length - 1 ? currentChannel++ : currentChannel = 0
+        setChannel()
       }
     }
     function powerToggle() {
@@ -87,8 +83,12 @@
         videoElement.setAttribute('src', '')
       } else {
         powerOn = true
-        videoElement.setAttribute('src', videoLinks[currentChannel])
+        setChannel()
       }
+    }
+    function setChannel() {
+      let src = youtubeBaseUrl + videoKeys[currentChannel] + youtubeUrlOptions
+      videoElement.setAttribute('src', src)
     }
   </script>
 </body>
